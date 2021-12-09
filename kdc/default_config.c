@@ -100,6 +100,7 @@ krb5_kdc_get_config(krb5_context context, krb5_kdc_configuration **config)
     c->historical_anon_realm = FALSE;
     c->strict_nametypes = FALSE;
     c->trpolicy = TRPOLICY_ALWAYS_CHECK;
+    c->enable_weak_preauth = TRUE;
     c->enable_pkinit = FALSE;
     c->pkinit_princ_in_cert = TRUE;
     c->pkinit_require_binding = TRUE;
@@ -251,6 +252,13 @@ krb5_kdc_get_config(krb5_context context, krb5_kdc_configuration **config)
 				      c->kdc_warn_pwexpire,
 				      "kdc", "kdc_warn_pwexpire", NULL);
 
+    c->enable_weak_preauth =
+	krb5_config_get_bool_default(context,
+				     NULL,
+				     c->enable_weak_preauth,
+				     "kdc",
+				     "enable_weak_preauth",
+				     NULL);
 
     c->enable_pkinit =
 	krb5_config_get_bool_default(context,

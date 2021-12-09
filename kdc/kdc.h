@@ -84,6 +84,8 @@ typedef struct krb5_kdc_configuration {
     krb5_boolean strict_nametypes;
     enum krb5_kdc_trpolicy trpolicy;
 
+    krb5_boolean enable_weak_preauth;
+
     krb5_boolean enable_pkinit;
     krb5_boolean pkinit_princ_in_cert;
     const char *pkinit_kdc_identity;

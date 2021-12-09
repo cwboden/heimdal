@@ -776,6 +776,13 @@ pa_enc_ts_validate(astgs_request_t r, const PA_DATA *pa)
     Key *pa_key;
     char *str;
 	
+    if (!r->config->enable_weak_preauth) {
+       ret = KRB5KDC_ERR_POLICY;
+       kdc_log(r->context, r->config, 0,
+               "Encrypted timestamp pre-authentication is disabled");
+       return ret;
+    }
+
     if (r->client->entry.flags.locked_out) {
        ret = KRB5KDC_ERR_CLIENT_REVOKED;
        kdc_log(r->context, r->config, 0,
